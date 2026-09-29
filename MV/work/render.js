@@ -6,7 +6,7 @@ const fs = require('fs');
   const page = await browser.newPage({ viewport: { width: 1080, height: 1920 } });
   page.on('pageerror', e => console.error('PAGEERR', e.message));
   page.on('console', m => { if (m.type() === 'error') console.error('CONSOLE', m.text()); });
-  await page.goto('file://' + __dirname + '/index.html?v=' + ver);
+  await page.goto('file://' + __dirname + '/index.html?v=' + ver + '&n=' + (process.env.SUBS||'4'));
   await page.waitForFunction('window.READY===true', null, { timeout: 30000 });
   const el = await page.$('#c');
   if (mode === 'still') {

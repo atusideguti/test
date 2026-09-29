@@ -353,6 +353,6 @@ function particles(t, n, seed, col, opt = {}) {
 function rr(x, y, w, h, r) { ctx.beginPath(); ctx.roundRect(x, y, w, h, r); }
 
 function shimmerDraw(fn, t, amp = 10, freq = .03, sp = 6, stepH = 6) {
-  ctx = octx; octx.clearRect(0, 0, W, H); fn(); ctx = mainCtx;
-  for (let y = 0; y < H; y += stepH) mainCtx.drawImage(oc, 0, y, W, stepH, Math.sin(y * freq + t * sp) * amp, y, W, stepH);
+  const prev = ctx; ctx = octx; octx.setTransform(1, 0, 0, 1, 0, 0); octx.clearRect(0, 0, W, H); fn(); ctx = prev;
+  for (let y = 0; y < H; y += stepH) ctx.drawImage(oc, 0, y, W, stepH, Math.sin(y * freq + t * sp) * amp, y, W, stepH);
 }

@@ -4,9 +4,23 @@
 html,body{margin:0;background:#000}canvas{display:block}
 </style></head><body><canvas id="c"></canvas>
 <script>const VER=new URLSearchParams(location.search).get('v')||'v1';document.write('<script src="env_'+VER+'.js"><\/script>');</script>
-<script src="engine.js"></script><script src="v1.js"></script><script src="v2.js"></script>
+<script src="engine.js"></script><script src="engine2.js"></script><script src="v1b.js"></script><script src="v2b.js"></script>
 <script>
 window.READY=false;
 Promise.all([document.fonts.load('100px "Dela Gothic One"',"ガ"),document.fonts.load('800 100px "Shippori Mincho B1"',"熱")]).then(()=>{window.READY=true});
-window.renderAt=function(t){ctx.globalAlpha=1;ctx.filter='none';const V=(VER==='v1'?V1:V2);const fx=V.draw(t)||{};V.post(t,fx);};
+const acc=document.createElement('canvas');acc.width=W;acc.height=H;const actx=acc.getContext('2d');
+window.SUBS=parseInt(new URLSearchParams(location.search).get('n')||'4');
+window.renderAt=function(t){
+  const V=(VER==='v1'?V1:V2);const N=window.SUBS;let fx={};window.FT=t;
+  actx.setTransform(1,0,0,1,0,0);actx.globalCompositeOperation='source-over';actx.clearRect(0,0,W,H);
+  for(let k=0;k<N;k++){
+    const tt=t+((k+.5)/N-.5)*.5/FPS;
+    ctx=mainCtx;mainCtx.setTransform(1,0,0,1,0,0);mainCtx.globalAlpha=1;mainCtx.filter='none';mainCtx.globalCompositeOperation='source-over';
+    mainCtx.fillStyle='#000';mainCtx.fillRect(0,0,W,H);
+    fx=V.draw(tt)||{};
+    actx.globalAlpha=1/(k+1);actx.drawImage(cv,0,0);
+  }
+  actx.globalAlpha=1;mainCtx.setTransform(1,0,0,1,0,0);mainCtx.globalAlpha=1;mainCtx.globalCompositeOperation='source-over';mainCtx.drawImage(acc,0,0);
+  V.post(t,fx);
+};
 </script></body></html>
