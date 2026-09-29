@@ -4,10 +4,10 @@
 html,body{margin:0;background:#000}canvas{display:block}
 </style></head><body><canvas id="c"></canvas>
 <script>const VER=new URLSearchParams(location.search).get('v')||'v1';document.write('<script src="env_'+VER+'.js"><\/script>');</script>
-<script src="engine.js"></script><script src="engine2.js"></script><script src="v1b.js"></script><script src="v2b.js"></script>
+<script src="engine.js"></script><script src="engine2.js"></script><script src="imgfx.js"></script><script src="v1c.js"></script><script src="v2c.js"></script>
 <script>
 window.READY=false;
-Promise.all([document.fonts.load('100px "Dela Gothic One"',"ガ"),document.fonts.load('800 100px "Shippori Mincho B1"',"熱")]).then(()=>{window.READY=true});
+Promise.all([KEY.decode(),document.fonts.load('100px "Dela Gothic One"',"ガ"),document.fonts.load('800 100px "Shippori Mincho B1"',"熱")]).then(()=>{window.READY=true});
 const acc=document.createElement('canvas');acc.width=W;acc.height=H;const actx=acc.getContext('2d');
 window.SUBS=parseInt(new URLSearchParams(location.search).get('n')||'4');
 window.renderAt=function(t){

@@ -5,3 +5,6 @@ MV/work/*_raw.wav
 MV/work/*.log
 MV/work/sheet_*.jpg
 MV/work/chk*.jpg
+MV/work/grid*.jpg
+MV/work/img/*.png
+MV/work/sheet*.jpg
